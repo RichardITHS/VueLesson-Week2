@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://unpkg.com/vue@3"></script>
+    <title>Vue Lesson</title>
+  </head>
+  <body>
+    <!-- Part 1 - Interpolation, get data from VUE app -->
+    <div id="app" class="header">
+      {{message}}{{age}}
+    </div>
+
+    <!-- Part 2 - HTML template via Vue -->
+    <div id="template" class="center"></div>
+    
+    <!-- Part 3 - Function Output, Event Handler, attribute with V-Bind and a link -->
+    <div id="random">
+      <!-- Calling a function inside VUE that is called outputMessage -->
+      <h2>{{ outputMessage() }}</h2>
+      <!-- Create a button that has an eventhandler (click) that calls a function inside VUE that refreshes a page -->
+      <!-- V-on:click is the same as @click -->
+      <button @click="refresh">Refresh Page</button>
+       <!-- v-bind: is the same as :  -->
+      <p>Learn more <a :href="vueLink"> on ITHS </a></p>
+    </div>
+
+    <!-- Part 4 - v-bind with classes attributes -->
+    <div id="numberBind" class="center">
+        <span :class="{ color: number === 42 }">This is a class attribute</span>
+    </div>
+
+    <!-- Part 5 - v-bind with style attributes -->
+    <div id="styleBind" class="center">
+    <span :style="{ color: name === 'Richard' || name === 'Bertil' ? 'blue' : 'pink' }">This is a style attribute</span> 
+    </div>
+ 
+    <!-- Part 6 TaskApp -  v-if, v-else, v-else-if, v-model, render conditionally -->
+    <div id="myTask">
+        <h2>My Tasklist</h2>
+        <!-- Bind the taskValue property with v-model -->
+        <input type="text" v-model="taskValue"/>
+        <!-- Pointing our click to the method we use (function call) -->
+        <button @click="addTask">Add Task</button>
+        <!-- We are supposed to adding tasks to our task list..if not we use a v-if
+        operator to see if we haven´t, if not, we show a text -->
+        <p v-if="tasks.length === 0">No tasks here... please add some!</p>
+        <!-- If the condition above is greater than 0, v-else will kick in -->
+        <!-- Remember!!! We must have the v-if, v-else-if and v-else next to each
+        others otherwise the operation will not work and break (think like have you do a if else code
+        in pure vanilla JS) -->
+        <ul v-else>
+        <!-- Rendering data from array (almost like an foreach or map in pure js)
+         we take out data from EACH of all in a array-->
+            <li v-for="(task, index) in tasks" @click="removeTask">{{task}}</li>
+        </ul>
+    </div>
+
+
+    <script src="app.js"></script>
+  </body>
+</html>
